@@ -43,6 +43,7 @@
 \usepackage{clrscode3e}                  % para pseudocódigo
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{wrapfig}
 
 % ---------------------------------------------------------------------------- %
 % Cabeçalhos similares ao TAOCP de Donald E. Knuth
@@ -126,7 +127,7 @@
 
 \title{Classificação intervalar com aplicação em imagens coloridas}
 
-\author{Rodrigo Augusto Dias Faria\inst{1} \and Roberto Hirata Jr.\inst{1}}
+\author{Rodrigo Augusto Dias Faria\inst{1}}
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
@@ -176,101 +177,11 @@
   % You might wish to add the option [pausesections]
 \end{frame}
 
-% Section and subsections will appear in the presentation overview
-% and table of contents.
-\section{Introdução}
-
-\subsection{First Subsection}
-
-\begin{frame}{First Slide Title}{Optional Subtitle}
-  \begin{itemize}
-  \item {
-    My first point.
-  }
-  \item {
-    My second point.
-  }
-  \end{itemize}
-\end{frame}
-
-\subsection{Second Subsection}
-
-% You can reveal the parts of a slide one at a time
-% with the \pause command:
-\begin{frame}{Second Slide Title}
-  \begin{itemize}
-  \item {
-    First item.
-    \pause % The slide will pause after showing the first item
-  }
-  \item {   
-    Second item.
-  }
-  % You can also specify when the content should appear
-  % by using <n->:
-  \item<3-> {
-    Third item.
-  }
-  \item<4-> {
-    Fourth item.
-  }
-  % or you can use the \uncover command to reveal general
-  % content (not just \items):
-  \item<5-> {
-    Fifth item. \uncover<6->{Extra text in the fifth item.}
-  }
-  \end{itemize}
-\end{frame}
-
 % ---------------------------------------------------------------------------- %
-
-\section{Fundamentação Teórica}
-
-\subsection{Another Subsection}
-
-\begin{frame}{Blocks}
-\begin{block}{Block Title}
-You can also highlight sections of your presentation in a block, with it's own title
-\end{block}
-\begin{theorem}
-There are separate environments for theorems, examples, definitions and proofs.
-\end{theorem}
-\begin{example}
-Here is an example of an example block.
-\end{example}
-\end{frame}
-
-
-% ---------------------------------------------------------------------------- %
-
-\section{Experimentos Preliminares}
-
-\begin{frame}{Summary}
-  \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
-  
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-
-% ---------------------------------------------------------------------------- %
-
-\input plano-trabalho
+\input 01-introducao
+\input 02-fundamentos
+\input 03-experimentos
+\input 04-plano-trabalho
 % ---------------------------------------------------------------------------- %
 % Bibliografia
 %\backmatter \singlespacing   % espaçamento simples
