@@ -79,7 +79,7 @@
 \begin{itemize}
     \item  (I)ntensidade é decomposta da informação de crominância
 \end{itemize}
-\begin{align}
+\begin{align*}
 \begin{split}
   H &=  \begin{cases}
             60\ffrac{(G - B)}{M - m}, & \text{se}\ M = R\\[0.7em]
@@ -94,28 +94,210 @@
   \\[0.5em]
   V &= M
 \end{split}
-\end{align}
+\end{align*}
 \end{frame}
 
 %------------------------------------------------------
 \subsection{Teoria fuzzy}
 \begin{frame}{Introdução}
+\begin{itemize}
+    \item Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo
+    \item $7 \in \mathbb{N}$ e $-7 \notin \mathbb{N}$
+    \item Há diversos fenômenos na natureza onde a relação de pertinência não é bem definida \citep{pedrycz:98}
+    \item Conjunto das pessoas altas, os números reais aproximadamente zero, o grupo de alunos mais inteligentes da escola
+    \item Alto grau de incerteza inerente aos elementos e conjuntos sendo considerados
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Introdução}
+\begin{itemize}
+    \item Visão tradicional e alternativa da ciência sobre a incerteza \citep{klir:95}
+    \item Com base na ideia moderna de que a incerteza é algo útil na ciência, Zadeh propôs a teoria de conjuntos \emph{fuzzy}
+    \item Capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência
+    \item Representação significativa e poderosa da medida de incerteza
+    \item Forma de expressar conceitos vagos em linguagem natural
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{Conjuntos \emph{fuzzy}}
+Da teoria de conjuntos clássicos tem-se a função característica:
+\begin{equation*}
+  \mu_A(x) =  \begin{cases}
+                1 \quad \text{se}\ x \in A \\
+                0 \quad \text{se}\ x \notin A
+              \end{cases}
+\end{equation*}
+
+Que é um mapeamento dos elementos de $U$ no conjunto binário $\{0, 1\}$:
+\begin{equation*}
+  \mu_A =  U \rightarrow \{0, 1\}
+\end{equation*}
+
+$\forall x \in U$, se $\mu_A(x) = 1$, então $x \in A$, se $\mu_A(x) = 0$, então $x \notin A$.\\[8pt]
+
+Em conjuntos \emph{fuzzy}, generalização aplicada no intervalo $[0, 1]$:
+\begin{equation*}
+  \mu_A =  U \rightarrow [0, 1]
+\end{equation*}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Conjuntos \emph{fuzzy}}
+
+\begin{block}{Definição de conjuntos \emph{fuzzy}}
+Um conjunto \emph{fuzzy} $A$ é um subconjunto do conjunto universo $U$ formado por pares ordenados de um elemento qualquer $x$ e seu grau de pertinência dado por $\mu_A(x)$, da forma:
+
+\begin{equation*}
+  A =  \{(x, \mu_A(x)) \ |\ x \in U\}
+\end{equation*}
+\end{block}
+
+As noções de inclusão, união, intersecção, complemento, relação, convexidade, etc., oriundas da teoria de conjuntos clássica, são estendidas a esses conjuntos \citep{zadeh:65}.
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Conjuntos \emph{fuzzy}}
+\begin{itemize}
+    \item $U$ pode ser composto por elementos discretos ou ser um espaço contínuo
+    \item A mesma implicação vale para o subconjunto $A$
+    \item Quando $U$ é um conjunto discreto e finito, tal que $U = \{x_1, x_2, x_3, \ldots, x_n\}$, pode-se simplesmente enumerar os seus elementos, juntamente com seus graus de pertinência:
+\begin{equation*}
+  A =  \frac{\mu_A(x_1)}{x_1} + \frac{\mu_A(x_2)}{x_2} + \ldots + \frac{\mu_A(x_n)}{x_n} = \sum_{i=1}^n \frac{\mu_A(x_i)}{x_i}
+\end{equation*}
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Conjuntos \emph{fuzzy}}
+\begin{block}{Definição de altura}
+A altura de $A$, denotado por $altura(A)$, corresponde ao limite superior do codomínio da sua função de pertinência, da forma:
+\begin{equation*}
+  altura(A) = \{\mu_A(x) \ |\ x \in U\}
+\label{equ:conjunto_fuzzy_altura}
+\end{equation*}
+\end{block}
+
+\begin{block}{Definição de suporte}
+O suporte de um conjunto \emph{fuzzy} $A$ em $U$, denotado por $suporte(A)$, é o conjunto dado por:
+\begin{equation*}
+  suporte(A) = \{x \in U \ |\ \mu_A(x) > 0 \}
+\end{equation*}
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Conjuntos \emph{fuzzy}}
+
+\begin{block}{Definição de $\alpha$\emph{-corte} ou $\alpha$\emph{-nível}}
+Um $\alpha$\emph{-corte} ou $\alpha$\emph{-nível}, é o subconjunto clássico de elementos cujo grau de pertinência é maior ou igual a um valor $\alpha$, formalmente:
+
+\begin{equation*}
+  \alpha-corte(A) = \{x \in U \ |\ \mu_A(x) \geq \alpha \}
+\end{equation*}
+\end{block}
+
+\begin{block}{Definição de núcleo ou \emph{kernel}}
+O núcleo ou \emph{kernel} de um conjunto \emph{fuzzy} $A$ em $U$, é o conjunto de elementos pertencentes inteiramente à $A$, da forma:
+
+\begin{equation*}
+  n\acute{u}cleo(A) = \{x \in U \ |\ \mu_A(x) = 1 \}
+\end{equation*}
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Representação gráfica das principais propriedades dos conjuntos \emph{fuzzy}}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{fuzzy_definitions}
+\end{figure}
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{Números \emph{fuzzy}}
+Um número \emph{fuzzy} é um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, da forma \citep{klir:95}:
+\begin{equation*}
+  A : \mathbb{R} \rightarrow [0, 1]
+\end{equation*}
+
+Para que $A$ seja, de fato, um número \emph{fuzzy}, o conjunto universo no qual $\mu_A$ está definida deve ser $\mathbb{R}$ e as seguintes propriedades devem ser satisfeitas \citep{barros:06}:
+
+\hspace{4pt}(i) todos os $\alpha$\emph{-corte} de $A$ são não vazios, com $0 \leq \alpha \leq 1$\\
+\hspace{2pt}(ii) todos os $\alpha$\emph{-corte} são intervalos fechados de $\mathbb{R}$\\
+(iii) $suporte(A) = \{x \in U \ |\ \mu_A(x) > 0\}$
+
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{Funções de pertinência}
+Um número \emph{fuzzy} $A$ é dito triangular se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{equation*}
+  \mu_A(x) =  \begin{cases}
+                \ffrac{x - a}{m - a}, &\text{se}\ a < x \leq m\\[0.5em]
+                \ffrac{b - x}{b - m}, &\text{se}\ m < x < b\\[0.5em]
+                0, &\text{c.c.}
+              \end{cases}
+\end{equation*}
+
+\column{0.5\textwidth}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{funcao_triangular}
+\end{figure}
+\end{columns}
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{Funções de pertinência}
+Um número \emph{fuzzy} $A$ é dito trapezoidal se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{equation*}
+  \mu_A(x) =  \begin{cases}
+                \ffrac{x - a}{b - a}, & \text{se}\ a < x < b\\[0.5em]
+                1, & \text{se}\ b \leq x \leq c\\[0.5em]
+                \ffrac{d - x}{d - c}, & \text{se}\ c < x < d\\[0.5em]
+                0, & \text{c.c.}
+              \end{cases}
+\end{equation*}
+
+\column{0.5\textwidth}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{funcao_trapezoidal}
+\end{figure}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Funções de pertinência}
+Um número \emph{fuzzy} $A$ é dito gaussiano se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{equation*}
+  \mu_A(x) =  \begin{cases}
+                \exp{\big(-\ffrac{{(x - m)}^2}{\sigma} \big)}, \\ \text{se}\ m - \sigma \leq x \leq m + \sigma\\[0.5em]
+                0, \ \text{c.c.}
+              \end{cases}
+\end{equation*}
+
+\column{0.5\textwidth}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{funcao_gaussiana}
+\end{figure}
+\end{columns}
 \end{frame}
 
 %------------------------------------------------------
