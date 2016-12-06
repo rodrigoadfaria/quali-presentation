@@ -3,11 +3,9 @@
 
 \begin{frame}{Introdução}
 \begin{itemize}
-    \item A cor tem a característica poderosa de funcionar como um descritor
     \item Os seres humanos têm a capacidade de discernir milhares de tonalidades e intensidades
     \item A percepção humana das cores se dá pela ativação de células nervosas que enviam mensagens ao cérebro sobre brilho (\textit{brightness}), matiz (\textit{hue}) e saturação (\textit{saturation})
     \item As cores podem ser especificadas por modelos matemáticos em tuplas de números em um sistema de coordenadas
-    \item Dois tipos: os modelos aditivos e subtrativos
 \end{itemize}
 \end{frame}
 
@@ -57,7 +55,7 @@
 \begin{itemize}
     \item Y = luminância, U = Azul - Y, V = Vermelho - Y
     \item Utilizado em sistemas de transmissão analógica de televisão nos padrões PAL e SECAM
-    \item YCbCr é um modelo desta família e é largamente utilizado em vídeos digitais.
+    \item YCbCr é um modelo desta família e é largamente utilizado em vídeos digitais
 \end{itemize}
 \begin{equation*}
   \begin{bmatrix}
@@ -99,17 +97,6 @@
 
 %------------------------------------------------------
 \subsection{Teoria fuzzy}
-\begin{frame}{Introdução}
-\begin{itemize}
-    \item Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo
-    \item $7 \in \mathbb{N}$ e $-7 \notin \mathbb{N}$
-    \item Há diversos fenômenos na natureza onde a relação de pertinência não é bem definida \citep{pedrycz:98}
-    \item Conjunto das pessoas altas, os números reais aproximadamente zero, o grupo de alunos mais inteligentes da escola
-    \item Alto grau de incerteza inerente aos elementos e conjuntos sendo considerados
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------
 \begin{frame}{Introdução}
 \begin{itemize}
     \item Visão tradicional e alternativa da ciência sobre a incerteza \citep{klir:95}
@@ -302,13 +289,215 @@ Um número \emph{fuzzy} $A$ é dito gaussiano se sua função de pertinência, d
 
 %------------------------------------------------------
 \subsection{Classificadores}
+\begin{frame}{Introdução}
+Seja o conjunto de dados de treinamento com $N$ amostras da forma:
+\begin{equation*}
+    D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
+\end{equation*}
+\noindent onde $i = 1, 2, \ldots, N$, $y_i \in Y$ e $Y = \{+1, -1\}$, e cada $x_i$ é um vetor $d$-dimensional da forma:
+
+\begin{equation*}
+  x = 
+  \begin{bmatrix}
+    a_1 \\ a_2 \\ \vdots \\ a_d
+  \end{bmatrix}
+\end{equation*}
+\noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
+\end{frame}
+
+%------------------------------------------------------
 \begin{frame}{Máquinas de Vetores Suporte (SVM)}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+    \item SVMs têm a habilidade de gerar um hiperplano ou conjunto de hiperplanos num espaço de alta ou infinita dimensionalidade \citep{duda:12}
+    \item Assumindo que $D$ é linearmente separável \citep{lorena:03}:
+\begin{equation*}
+w \cdot x + b = 0
+\end{equation*}
+\end{itemize}
+
+\column{0.5\textwidth}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{svm_support_vectors}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Máquinas de Vetores Suporte (SVM)}
+Outros dois hiperplanos paralelos ao hiperplano ótimo podem ser obtidos:
+\begin{equation*}
+\begin{cases}
+    w \cdot x + b = +1\\
+    w \cdot x + b = -1
+\end{cases}
+\end{equation*}
+
+Restrições são definidas para evitar que não existam pontos entre $w \cdot x + b = 0$ e $w \cdot x + b = \pm 1$ \citep{lorena:03}:
+\begin{equation*}
+\begin{cases}
+    w \cdot x_i + b \geq +1, & \text{se}\ y_i = +1\\
+    w \cdot x_i + b \leq -1, & \text{se}\ y_i = -1
+\end{cases}
+\end{equation*}
+\noindent ou, equivalentemente:
+\begin{equation*}
+    y_i (w \cdot x_i + b) \geq 1
+\end{equation*}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Máquinas de Vetores Suporte (SVM)}
+\begin{itemize}
+    \item A minimização de $||w||$ maximiza a margem e, sendo assim, tem-se um problema de otimização
+    \item $w$ e $b$ ótimos que resolvem este problema definem o classificador e podem ser obtidos por multiplicadores de Lagrange \citep{campbell:00}:
+\end{itemize}
+\begin{equation*}
+\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j x_i\cdot x_j
+\end{equation*}
+
+\begin{equation*}
+\text{Sujeito a: }
+\begin{cases}
+    \alpha_i \geq 0\\[1em]
+    \sum_{i=1}^N \alpha_i y_i = 0
+\end{cases}
+\end{equation*}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Máquinas de Vetores Suporte (SVM)}
+SVMs lineares podem ser estendidas:
+\begin{equation*}
+    D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_N), y_N)
+\end{equation*}
+
+A forma do hiperplano ótimo agora é definida por:
+\begin{equation*}
+w \cdot \Phi(x) + b = 0
+\end{equation*}
+
+O problema de otimização pode ser resolvido como \citep{lorena:03}:
+\begin{equation*}
+\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j \Phi(x_i)\cdot \Phi(x_j)
+\end{equation*}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Máquinas de Vetores Suporte (SVM)}
+\emph{Kernels} são funções que têm a finalidade de projetar os vetores de entrada num espaço de características com número de dimensões exponencial ou infinito \citep{taylor:04}:
+\begin{equation*}
+k(x_i, x_j) =  \Phi(x_i) \cdot \Phi(x_j)
+\end{equation*}
+
+Alguns dos \emph{kernels} mais utilizados são \citep{lorena:03}:
+\begin{itemize}
+\item \emph{Kernel} linear
+\begin{equation*}
+k(x_i, x_j) =  (x_i \cdot x_j)
+\end{equation*}
+
+\item \emph{Kernel} polinomial
+\begin{equation*}
+k(x_i, x_j) =  ({\gamma x_i \cdot x_j + r} )^g
+\end{equation*}
+
+\item \emph{Kernel} gaussiano ou RBF
+\begin{equation*}
+k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - x_j||}^2 \big)}
+\end{equation*}
+\end{itemize}
+
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{$k$-Vizinhos Mais Próximos ($k$-NN)}
+\begin{columns}
+\column{0.35\textwidth}
+\begin{itemize}
+    \item $k$-NN é um algoritmo baseado em instâncias
+    \item Rotula uma nova amostra $x$ com a classe de maior frequência dentre as $k$ mais próximas
+    \item Decisão por maioria de votos \citep{duda:12}
+\end{itemize}
+
+\column{0.65\textwidth}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{knn_exemplo}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{$k$-Vizinhos Mais Próximos ($k$-NN)}
+A distância entre duas amostras $x_i$ e $x_j$ quaisquer pode ser obtida em termos da distância Euclidiana:
+\begin{equation*}
+\label{eq:knn_distancia_euclidiana}
+d(x_i, x_j) = \sqrt{\sum_{r=1}^d (a_r(x_i) - a_r(x_j))^2}
+\end{equation*}
+
+Para classificar uma nova amostra $x_q$ \citep{mitchell:97}:
+\begin{equation*}
+\label{eq:knn_funcao_argmax}
+g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k \delta (y, f(x_i))
+\end{equation*}
+\noindent onde
+\begin{equation*}
+\label{eq:knn_delta}
+  \delta (y, f(x_i)) =  \begin{cases}
+                1, \quad \text{se}\ y = f(x_i) \\
+                0, \quad \text{caso contrário}
+              \end{cases}
+\end{equation*}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{$k$-Vizinhos Mais Próximos ($k$-NN)}
+\begin{itemize}
+    \item Uma variação da função é a atribuição de pesos a cada um dos $k$ vizinhos, conforme sua distância
+    \item Implica que pontos mais próximos de $x_q$ têm maior influência na sua rotulação
+\end{itemize}
+\begin{equation*}
+g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
+\end{equation*}
+\noindent onde
+\begin{equation*}
+  w_i = \frac{1}{d(x_q, x_i)^2}
+\end{equation*}
+
+No caso em que $d(x_q, x_i) = 0$, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)$ \citep{mitchell:97}.
 \end{frame}
 
 %------------------------------------------------------
 \begin{frame}{Árvores de decisão}
+\begin{itemize}
+    \item Processo iterativo onde um atributo (nó) é escolhido como raiz até algum nó folha, onde a classe é atribuída à amostra
+    \item ID3 avalia cada atributo através de um teste estatístico para determinar o quão bem ele, por si só, classifica as amostras de treinamento \citep{quinlan:86}
+    \item O melhor atributo é selecionado como o nó raiz da árvore
+    \item Um ramo descendente do nó raiz é criado para cada valor possível deste atributo \citep{mitchell:97}
+    \item Algoritmo de busca guloso \citep{mitchell:97}
+    \item C4.5 estende o ID3 para possibilitar o uso de atributos contínuos, dados ausentes e poda da árvore \citet{quinlan:93}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}{Árvores de decisão}
+Para medir a impureza de uma partição, o ID3 usa o conceito de entropia \citep{quinlan:86}:
+
+\begin{equation*}
+H(D) = - y_\oplus log_2 y_\oplus - y_\ominus log_2 y_\ominus
+\end{equation*}
+
+O teste estatístico, conhecido como ganho de informação, mede a efetividade de um atributo na classificação dos dados \citep{quinlan:86}:
+\begin{equation*}
+IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
+\end{equation*}
+\noindent onde $V(a_r)$ é o conjunto de todos os possíveis valores do atributo $a_r$, $D_v$ é o subconjunto de $D$ no qual o atributo $a_r$ tem o valor $v$.
+
 \end{frame}
