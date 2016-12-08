@@ -3,7 +3,7 @@
 \subsection{Conjunto de dados UCI}
 \begin{frame}{Repositório da Universidade da Califórnia em Irvine}
   \begin{itemize}
-  
+  \item Proposto por \citet{uci-skin-dataset:12}
   \item Contém 245.057 amostras obtidas de imagens do PAL e FERET \citep{pal-texas:04, feret:96}
   
   \item 194.198 são de pixels não pele e 50.859 de pixels de pele
@@ -56,10 +56,8 @@
 \subsection{Conjunto de dados SFA}
 \begin{frame}{Banco de imagens de faces do FERET e AR}
   \begin{itemize}
+      \item Proposto por \citet{sfa-skin-dataset:13}
       \item 876 imagens de faces obtidas do FERET, criado por \citet{feret:96} e 242 do AR, proposto por \citet{ar-face-database:98}
-      
-      \item As imagens do AR têm fundo branco e pequenas variações de cor da pele e, portanto, o ambiente é mais controlado
-      
       \item Três amostras de pele e cinco não pele foram geradas aleatoriamente considerando a máscara \emph{ground truth} de cada imagem
   \end{itemize}
 \end{frame}
@@ -230,9 +228,11 @@ O treinamento foi executado com 10 tarefas em paralelo em ambos os classificador
 \subsection{Terceiro experimento}
 \begin{frame}{Terceiro experimento}
     \begin{itemize}
-        \item Realizado com árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13} usando o conjunto de dados SFA nos espaços de cores RGB, HSV, Lab e YCbCr
-        \item Os parâmetros do \emph{FuzzyDT} podem ser customizados para determinar a poda da árvore e o método de estimativa do número de conjuntos \emph{fuzzy} por atributo
+        \item Realizado com \emph{FuzzyDT} usando o conjunto de dados SFA nos espaços de cores RGB, HSV, Lab e YCbCr
+        \item Parâmetros para determinar a poda da árvore e o método de estimativa do número de conjuntos \emph{fuzzy} por atributo
         \item Desenvolvido um algoritmo de tabela de busca para encontrar os parâmetros ótimos
+        \item Função de pertinência triangular
+        \item Conjuntos \emph{fuzzy} são igualmente distribuídos em cada partição
     \end{itemize}
 \end{frame}
 

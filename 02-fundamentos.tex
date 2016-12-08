@@ -10,14 +10,6 @@
 \end{frame}
 
 %------------------------------------------------------
-\begin{frame}{Modelo de Munsell}
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.55\textwidth]{munsell-system}
-\end{figure}
-\end{frame}
-
-%------------------------------------------------------
 \begin{frame}{Diagrama de cromaticidade CIE 1931}
 \begin{columns}
 \column{0.5\textwidth}
@@ -122,7 +114,6 @@ Que é um mapeamento dos elementos de $U$ no conjunto binário $\{0, 1\}$:
   \mu_A =  U \rightarrow \{0, 1\}
 \end{equation*}
 
-$\forall x \in U$, se $\mu_A(x) = 1$, então $x \in A$, se $\mu_A(x) = 0$, então $x \notin A$.\\[8pt]
 
 Em conjuntos \emph{fuzzy}, generalização aplicada no intervalo $[0, 1]$:
 \begin{equation*}
@@ -142,59 +133,6 @@ Um conjunto \emph{fuzzy} $A$ é um subconjunto do conjunto universo $U$ formado 
 \end{block}
 
 As noções de inclusão, união, intersecção, complemento, relação, convexidade, etc., oriundas da teoria de conjuntos clássica, são estendidas a esses conjuntos \citep{zadeh:65}.
-
-\end{frame}
-
-%------------------------------------------------------
-\begin{frame}{Conjuntos \emph{fuzzy}}
-\begin{itemize}
-    \item $U$ pode ser composto por elementos discretos ou ser um espaço contínuo
-    \item A mesma implicação vale para o subconjunto $A$
-    \item Quando $U$ é um conjunto discreto e finito, tal que $U = \{x_1, x_2, x_3, \ldots, x_n\}$, pode-se simplesmente enumerar os seus elementos, juntamente com seus graus de pertinência:
-\begin{equation*}
-  A =  \frac{\mu_A(x_1)}{x_1} + \frac{\mu_A(x_2)}{x_2} + \ldots + \frac{\mu_A(x_n)}{x_n} = \sum_{i=1}^n \frac{\mu_A(x_i)}{x_i}
-\end{equation*}
-\end{itemize}
-
-\end{frame}
-
-%------------------------------------------------------
-\begin{frame}{Conjuntos \emph{fuzzy}}
-\begin{block}{Definição de altura}
-A altura de $A$, denotado por $altura(A)$, corresponde ao limite superior do codomínio da sua função de pertinência, da forma:
-\begin{equation*}
-  altura(A) = \{\mu_A(x) \ |\ x \in U\}
-\label{equ:conjunto_fuzzy_altura}
-\end{equation*}
-\end{block}
-
-\begin{block}{Definição de suporte}
-O suporte de um conjunto \emph{fuzzy} $A$ em $U$, denotado por $suporte(A)$, é o conjunto dado por:
-\begin{equation*}
-  suporte(A) = \{x \in U \ |\ \mu_A(x) > 0 \}
-\end{equation*}
-\end{block}
-
-\end{frame}
-
-%------------------------------------------------------
-\begin{frame}{Conjuntos \emph{fuzzy}}
-
-\begin{block}{Definição de $\alpha$\emph{-corte} ou $\alpha$\emph{-nível}}
-Um $\alpha$\emph{-corte} ou $\alpha$\emph{-nível}, é o subconjunto clássico de elementos cujo grau de pertinência é maior ou igual a um valor $\alpha$, formalmente:
-
-\begin{equation*}
-  \alpha-corte(A) = \{x \in U \ |\ \mu_A(x) \geq \alpha \}
-\end{equation*}
-\end{block}
-
-\begin{block}{Definição de núcleo ou \emph{kernel}}
-O núcleo ou \emph{kernel} de um conjunto \emph{fuzzy} $A$ em $U$, é o conjunto de elementos pertencentes inteiramente à $A$, da forma:
-
-\begin{equation*}
-  n\acute{u}cleo(A) = \{x \in U \ |\ \mu_A(x) = 1 \}
-\end{equation*}
-\end{block}
 
 \end{frame}
 
@@ -308,45 +246,19 @@ Seja o conjunto de dados de treinamento com $N$ amostras da forma:
 %------------------------------------------------------
 \begin{frame}{Máquinas de Vetores Suporte (SVM)}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.45\textwidth}
 \begin{itemize}
     \item SVMs têm a habilidade de gerar um hiperplano ou conjunto de hiperplanos num espaço de alta ou infinita dimensionalidade \citep{duda:12}
-    \item Assumindo que $D$ é linearmente separável \citep{lorena:03}:
-\begin{equation*}
-w \cdot x + b = 0
-\end{equation*}
+    \item Assumindo que $D$ é linearmente separável \citep{lorena:03}
 \end{itemize}
 
-\column{0.5\textwidth}
+\column{0.55\textwidth}
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{svm_support_vectors}
+  \includegraphics[width=1\textwidth]{svm_max_sep_hyperplane_with_margin}
 \end{figure}
 \end{columns}
 
-\end{frame}
-
-%------------------------------------------------------
-\begin{frame}{Máquinas de Vetores Suporte (SVM)}
-Outros dois hiperplanos paralelos ao hiperplano ótimo podem ser obtidos:
-\begin{equation*}
-\begin{cases}
-    w \cdot x + b = +1\\
-    w \cdot x + b = -1
-\end{cases}
-\end{equation*}
-
-Restrições são definidas para evitar que não existam pontos entre $w \cdot x + b = 0$ e $w \cdot x + b = \pm 1$ \citep{lorena:03}:
-\begin{equation*}
-\begin{cases}
-    w \cdot x_i + b \geq +1, & \text{se}\ y_i = +1\\
-    w \cdot x_i + b \leq -1, & \text{se}\ y_i = -1
-\end{cases}
-\end{equation*}
-\noindent ou, equivalentemente:
-\begin{equation*}
-    y_i (w \cdot x_i + b) \geq 1
-\end{equation*}
 \end{frame}
 
 %------------------------------------------------------
@@ -362,7 +274,7 @@ Restrições são definidas para evitar que não existam pontos entre $w \cdot x
 \begin{equation*}
 \text{Sujeito a: }
 \begin{cases}
-    \alpha_i \geq 0\\[1em]
+    0 \leq \alpha_i \leq C\\[1em]
     \sum_{i=1}^N \alpha_i y_i = 0
 \end{cases}
 \end{equation*}
@@ -471,7 +383,6 @@ g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
   w_i = \frac{1}{d(x_q, x_i)^2}
 \end{equation*}
 
-No caso em que $d(x_q, x_i) = 0$, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)$ \citep{mitchell:97}.
 \end{frame}
 
 %------------------------------------------------------
@@ -479,9 +390,7 @@ No caso em que $d(x_q, x_i) = 0$, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)
 \begin{itemize}
     \item Processo iterativo onde um atributo (nó) é escolhido como raiz até algum nó folha, onde a classe é atribuída à amostra
     \item ID3 avalia cada atributo através de um teste estatístico para determinar o quão bem ele, por si só, classifica as amostras de treinamento \citep{quinlan:86}
-    \item O melhor atributo é selecionado como o nó raiz da árvore
     \item Um ramo descendente do nó raiz é criado para cada valor possível deste atributo \citep{mitchell:97}
-    \item Algoritmo de busca guloso \citep{mitchell:97}
     \item C4.5 estende o ID3 para possibilitar o uso de atributos contínuos, dados ausentes e poda da árvore \citet{quinlan:93}
 \end{itemize}
 \end{frame}
@@ -498,6 +407,5 @@ O teste estatístico, conhecido como ganho de informação, mede a efetividade d
 \begin{equation*}
 IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
 \end{equation*}
-\noindent onde $V(a_r)$ é o conjunto de todos os possíveis valores do atributo $a_r$, $D_v$ é o subconjunto de $D$ no qual o atributo $a_r$ tem o valor $v$.
 
 \end{frame}
